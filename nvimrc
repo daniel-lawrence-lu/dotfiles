@@ -50,10 +50,14 @@ call plug#end()
 " airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_theme='molokai'
+let g:airline_theme='deus'
 
 " c++
 let g:cpp_class_scope_highlight=1
+let c_no_curly_error=1
 
-colorscheme molokai
+colorscheme minimalist
 set background=dark
+
+au TermOpen * au <buffer> BufEnter,WinEnter redraw!
+au BufRead,BufNewFile *.gv set filetype=dot
