@@ -86,3 +86,4 @@ colorscheme hybrid_material
 "set background=dark
 au FileType cpp ClangFormatAutoEnable
 au BufRead,BufNewFile *.log set nowrap
+au BufRead,BufNewFile *.gv set filetype=dot
