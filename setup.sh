@@ -1,6 +1,7 @@
 #!/bin/bash
 mkdir -p ~/.config/nvim ~/.config/i3 ~/.config/fish ~/.config/fontconfig
 curdir=$(pwd)
+ln -s $curdir/bashrc ~/.bashrc
 ln -s $curdir/nvimrc ~/.config/nvim/init.vim
 ln -s $curdir/i3config ~/.config/i3/config
 ln -s $curdir/i3config ~/.config/sway/config
