@@ -11,14 +11,7 @@
 
 set $mod Mod1
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below. ISO 10646 = Unicode
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, if you need a lot of unicode glyphs or
-# right-to-left text rendering, you should instead use pango for rendering and
-# chose a FreeType font, such as:
-font pango:monospace 9
+font monospace 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -27,7 +20,7 @@ floating_modifier $mod
 bindsym $mod+Return exec urxvt -e fish
 
 # screenshot
-bindsym $mod+Shift+x --release exec ~/scripts/screenshot.sh
+bindsym $mod+Shift+x --release exec ~/scripts/screenshot_wayland.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -35,8 +28,6 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec dmenu_run -fn 'monospace-9' -nb \#1c1c1c -sb \#1c1c1c -nf \#B6B6BF -sf \#ffffff -p »
-
-bindsym $mod+Shift+z --release exec i3lock -d
 
 # change focus
 bindsym $mod+h focus left
@@ -145,42 +136,32 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
-        #mode hide
-        status_command i3status
-        modifier $mod
-        tray_output primary
-        colors {
-            background #1c1c1c
-            statusline #cfcfd9
-            separator #1c1c1c
-            # border background text
-            focused_workspace #1c1c1c #407fdd #cfcfd9
-            active_workspace #1c1c1c #407fdd #cfcfd9
-            inactive_workspace #1c1c1c #1c1c1c #cfcfd9
-            urgent_workspace #2f343a #ff3300 #ffffff
-        }
+    status_command i3status
+    colors {
+        background #1c1c1c
+        statusline #cfcfd9
+        separator #1c1c1c
+        focused_workspace #1c1c1c #407fdd #cfcfd9
+        active_workspace #1c1c1c #407fdd #cfcfd9
+        inactive_workspace #1c1c1c #1c1c1c #cfcfd9
+        urgent_workspace #2f343a #ff3300 #ffffff
+    }
 }
 
 # class border background text indicator
-client.focused #344169 #344169 #CFCFD9 #192033
-client.focused_inactive #1c1c1c #1c1c1c #888888 #333333
-client.unfocused #1c1c1c #1c1c1c #888888 #333333
-client.urgent #EDE4DF #EDE4DF #ffffff #900000
+client.focused #344169 #344169 #CFCFD9 #192033 #344169
+client.focused_inactive #1c1c1c #1c1c1c #888888 #333333 #1c1c1c
+client.unfocused #1c1c1c #1c1c1c #888888 #333333 #1c1c1c
+client.urgent #EDE4DF #EDE4DF #ffffff #900000 #EDE4DF
 
 #border style
-new_window normal
-#hide_edge_borders both
+default_border normal
 
 # except for urxvt
-for_window [class="^qutebrowser$"] border pixel 5
 for_window [class="^mpv$"] border none
 for_window [class="^firefox"] border none
-for_window [class="tarCraft"] fullscreen enable
 for_window [class="^URxvt$"] border pixel 5
-for_window [class="vtk"] fullscreen enable move 1
 
 # workspace screen
 workspace 1 output DP-4
@@ -194,8 +175,8 @@ workspace 8 output DP-0
 workspace 9 output DP-0
 workspace 10 output DP-0
 #startup programs
-exec hsetroot -solid "#000000"
 exec dunst
-exec nm-applet
 exec ibus-daemon
 exec xrdb -merge /home/dllu/.config/Xresources
+exec autocutsel -fork
+output * bg /home/dllu/pictures/oblique.png fit
